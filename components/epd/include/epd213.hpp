@@ -75,9 +75,15 @@ public:
     esp_err_t refreshPartial();
     // Deep sleep (RAM retained). Call after each update to protect the panel.
     esp_err_t sleep();
+    // Before ESP32 deep sleep: releases the SPI bus and holds the control lines
+    // at fixed levels (RST/CS high, DC/SCLK/MOSI low) instead of letting them float,
+    // so the panel stays in deep sleep. Call after sleep(), as the last driver call
+    // before esp_deep_sleep_start(). begin() releases the holds on the next boot.
+    esp_err_t holdPinsForDeepSleep();
 
 private:
     void drawChar(int x, int y, char ch, int scale, Color c);
+    esp_err_t driveIdleLevels();
 
     // low level
     void hwReset();

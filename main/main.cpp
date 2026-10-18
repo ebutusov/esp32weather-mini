@@ -89,6 +89,10 @@ extern "C" void app_main(void) {
     // Step 6: panel off, WiFi off, deep sleep.
     if (display_ret == ESP_OK) {
         display.sleep();
+        const esp_err_t r = display.holdPinsForDeepSleep();
+        if (r != ESP_OK) {
+            ESP_LOGW(TAG, "panel pin hold failed: %s", esp_err_to_name(r));
+        }
     }
     ws::wifiStop();
     ESP_LOGI(TAG, "deep sleep for %" PRIu32 " s", sleep_seconds);

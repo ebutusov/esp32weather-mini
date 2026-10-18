@@ -159,6 +159,14 @@ esp_err_t Epd213::begin() {
     ESP_RETURN_ON_FALSE(prev_, ESP_ERR_NO_MEM, TAG, "prev buffer alloc failed");
     memset(prev_, 0xFF, kBufSize);
 
+    // Release the deep-sleep holds from holdPinsForDeepSleep(). Drive the held
+    // levels first so the pins don't glitch (e.g. RST low) when the hold drops.
+    ESP_RETURN_ON_ERROR(driveIdleLevels(), TAG, "idle levels");
+    for (gpio_num_t p : {pins_.rst, pins_.cs, pins_.dc, pins_.sclk, pins_.mosi}) {
+        gpio_hold_dis(p);
+    }
+    gpio_deep_sleep_hold_dis();
+
     // Control GPIOs
     gpio_config_t out_cfg = {};
     out_cfg.pin_bit_mask = (1ULL << pins_.rst) | (1ULL << pins_.dc);
@@ -367,6 +375,42 @@ esp_err_t Epd213::refreshPartial() {
 
 esp_err_t Epd213::sleep() {
     sendCmdData(cmd::DEEP_SLEEP, {0x01});  // mode 1: keep RAM
+    return ESP_OK;
+}
+
+// Pin levels while the ESP32 sleeps: RST high keeps the panel out of reset (a
+// reset would wake it from deep sleep), CS high deselects it, the rest low.
+esp_err_t Epd213::driveIdleLevels() {
+    gpio_config_t cfg = {};
+    cfg.pin_bit_mask = (1ULL << pins_.rst) | (1ULL << pins_.cs) |
+                       (1ULL << pins_.dc) | (1ULL << pins_.sclk) |
+                       (1ULL << pins_.mosi);
+    cfg.mode = GPIO_MODE_OUTPUT;
+    ESP_RETURN_ON_ERROR(gpio_config(&cfg), TAG, "gpio idle cfg");
+    gpio_set_level(pins_.rst, 1);
+    gpio_set_level(pins_.cs, 1);
+    gpio_set_level(pins_.dc, 0);
+    gpio_set_level(pins_.sclk, 0);
+    gpio_set_level(pins_.mosi, 0);
+    return ESP_OK;
+}
+
+esp_err_t Epd213::holdPinsForDeepSleep() {
+    // Give SCLK/MOSI/CS back to plain GPIO so their levels can be set and held.
+    if (dev_) {
+        ESP_RETURN_ON_ERROR(spi_bus_remove_device(dev_), TAG, "spi remove device");
+        dev_ = nullptr;
+    }
+    if (bus_inited_) {
+        ESP_RETURN_ON_ERROR(spi_bus_free(host_), TAG, "spi bus free");
+        bus_inited_ = false;
+    }
+    ESP_RETURN_ON_ERROR(driveIdleLevels(), TAG, "idle levels");
+    for (gpio_num_t p : {pins_.rst, pins_.cs, pins_.dc, pins_.sclk, pins_.mosi}) {
+        ESP_RETURN_ON_ERROR(gpio_hold_en(p), TAG, "gpio hold");
+    }
+    // Classic ESP32: digital pads keep their hold in deep sleep only with this.
+    gpio_deep_sleep_hold_en();
     return ESP_OK;
 }
 
