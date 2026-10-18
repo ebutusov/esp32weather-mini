@@ -10,3 +10,4 @@ server/config.json
 server/images/
 server/.venv/
 spiffs/config.json
+specs.md
