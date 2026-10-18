@@ -1,0 +1,17 @@
+# LILYGO T5 V2.3.x (classic ESP32, 4MB flash, no PSRAM)
+CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
+CONFIG_ESPTOOLPY_FLASHSIZE="4MB"
+
+# 1 ms tick so short vTaskDelay() values (BUSY polling) are accurate
+CONFIG_FREERTOS_HZ=1000
+
+# Smaller binary, we don't use C++ exceptions
+CONFIG_COMPILER_CXX_EXCEPTIONS=n
+
+# Custom partition table: nvs, phy_init, 2.9 MB factory app, 256 KB SPIFFS "storage"
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+CONFIG_PARTITION_TABLE_FILENAME="partitions.csv"
+
+# WiFi + HTTP client + cJSON run on the main task
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192

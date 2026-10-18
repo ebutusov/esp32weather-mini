@@ -1,0 +1,8 @@
+{
+  "api_key": "<OpenWeatherMap API key>",
+  "city_id": 756135,
+  "location_name": null,
+  "image_dir": "images",
+  "font_path": null,
+  "font_bold_path": null
+}

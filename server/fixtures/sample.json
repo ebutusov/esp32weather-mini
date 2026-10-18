@@ -1,0 +1,80 @@
+{
+  "current": {
+    "coord": {"lon": 21.0118, "lat": 52.2298},
+    "weather": [{"id": 601, "main": "Snow", "description": "snow", "icon": "13d"}],
+    "base": "stations",
+    "main": {"temp": -3.4, "feels_like": -8.1, "temp_min": -4.2, "temp_max": -2.6, "pressure": 1008, "humidity": 93, "sea_level": 1008, "grnd_level": 994},
+    "visibility": 2100,
+    "wind": {"speed": 4.6, "deg": 290},
+    "snow": {"1h": 0.42},
+    "clouds": {"all": 100},
+    "dt": 1768902000,
+    "sys": {"type": 2, "id": 2032856, "country": "PL", "sunrise": 1768889912, "sunset": 1768920493},
+    "timezone": 3600,
+    "id": 756135,
+    "name": "Warsaw",
+    "cod": 200
+  },
+  "forecast": {
+    "cod": "200",
+    "message": 0,
+    "cnt": 4,
+    "list": [
+      {
+        "dt": 1768903200,
+        "main": {"temp": -3.1, "feels_like": -7.9, "temp_min": -3.4, "temp_max": -3.1, "pressure": 1008, "sea_level": 1008, "grnd_level": 994, "humidity": 92, "temp_kf": -0.3},
+        "weather": [{"id": 600, "main": "Snow", "description": "light snow", "icon": "13d"}],
+        "clouds": {"all": 100},
+        "wind": {"speed": 4.4, "deg": 288, "gust": 9.1},
+        "visibility": 3500,
+        "pop": 0.86,
+        "snow": {"3h": 0.94},
+        "sys": {"pod": "d"},
+        "dt_txt": "2026-01-20 10:00:00"
+      },
+      {
+        "dt": 1768914000,
+        "main": {"temp": -1.8, "feels_like": -6.2, "temp_min": -1.8, "temp_max": -1.8, "pressure": 1009, "sea_level": 1009, "grnd_level": 995, "humidity": 85, "temp_kf": 0},
+        "weather": [{"id": 803, "main": "Clouds", "description": "broken clouds", "icon": "04d"}],
+        "clouds": {"all": 75},
+        "wind": {"speed": 3.9, "deg": 300, "gust": 7.6},
+        "visibility": 10000,
+        "pop": 0.2,
+        "sys": {"pod": "d"},
+        "dt_txt": "2026-01-20 13:00:00"
+      },
+      {
+        "dt": 1768924800,
+        "main": {"temp": -4.6, "feels_like": -8.8, "temp_min": -4.6, "temp_max": -4.6, "pressure": 1011, "sea_level": 1011, "grnd_level": 997, "humidity": 88, "temp_kf": 0},
+        "weather": [{"id": 801, "main": "Clouds", "description": "few clouds", "icon": "02n"}],
+        "clouds": {"all": 18},
+        "wind": {"speed": 2.8, "deg": 310, "gust": 5.2},
+        "visibility": 10000,
+        "pop": 0,
+        "sys": {"pod": "n"},
+        "dt_txt": "2026-01-20 16:00:00"
+      },
+      {
+        "dt": 1768935600,
+        "main": {"temp": -7.9, "feels_like": -11.5, "temp_min": -7.9, "temp_max": -7.9, "pressure": 1013, "sea_level": 1013, "grnd_level": 999, "humidity": 90, "temp_kf": 0},
+        "weather": [{"id": 800, "main": "Clear", "description": "clear sky", "icon": "01n"}],
+        "clouds": {"all": 2},
+        "wind": {"speed": 2.1, "deg": 320, "gust": 3.9},
+        "visibility": 10000,
+        "pop": 0,
+        "sys": {"pod": "n"},
+        "dt_txt": "2026-01-20 19:00:00"
+      }
+    ],
+    "city": {
+      "id": 756135,
+      "name": "Warsaw",
+      "coord": {"lat": 52.2298, "lon": 21.0118},
+      "country": "PL",
+      "population": 1000000,
+      "timezone": 3600,
+      "sunrise": 1768889912,
+      "sunset": 1768920493
+    }
+  }
+}

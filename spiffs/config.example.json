@@ -1,0 +1,6 @@
+{
+  "wifi_ssid": "MyNetwork",
+  "wifi_password": "secret",
+  "server_url": "http://192.168.1.10:8080/latest.bin",
+  "sleep_seconds": 1800
+}
