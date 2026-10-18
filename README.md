@@ -1,7 +1,7 @@
 # T5 V2.3.x e-paper weather station (ESP-IDF firmware + Python server)
 
 Target: LILYGO T5 V2.3 / V2.3.1 / V2.3.2, 2.13" 250x122 e-paper, classic ESP32 (4 MB flash, no PSRAM).
-The e-paper driver was tested on a LILYGO T5 V2.3.x with a DEPG0213BN (SSD1680) panel and ESP-IDF 6.1. Full and partial refresh both work. Other panel variants are untested.
+Tested on a LILYGO T5 V2.3.x with a DEPG0213BN (SSD1680) panel and ESP-IDF 6.1: the complete weather-station cycle works, and the driver's full and partial refresh both work. Other panel variants are untested.
 
 This repo is a mini weather station in two parts. The Python server in `server/` renders the weather into a ready-made 4000-byte framebuffer image. The device wakes, downloads that image, shows it, and goes back to deep sleep. `PROTOCOL.md` is the contract between the two: payload format, HTTP endpoint, config keys and work cycle.
 

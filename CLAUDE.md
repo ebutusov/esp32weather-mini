@@ -8,7 +8,7 @@ Mini weather station with two halves:
 - **Firmware** (repo root, `main/`, `components/epd/`): pure ESP-IDF (C++, no Arduino) for the LILYGO T5 V2.3.x board: classic ESP32, 4 MB flash, no PSRAM, 2.13" 250x122 SSD1680-family e-paper. It downloads a ready-made 4000-byte framebuffer image from the server, shows it and deep-sleeps.
 - **Server** (`server/`, Python 3.10+, Pillow): `generator.py` renders OpenWeatherMap data into that framebuffer format, `server.py` serves the newest image over HTTP.
 
-`specs.md` is the original product spec. **`PROTOCOL.md` is the binding contract** between firmware and server (payload layout, HTTP endpoint, `config.json` keys, work cycle). Change it first if either side must deviate. The driver has been tested on hardware (DEPG0213BN panel, ESP-IDF 6.1). The weather-station `main/` has only been build-tested.
+`specs.md` is the original product spec. **`PROTOCOL.md` is the binding contract** between firmware and server (payload layout, HTTP endpoint, `config.json` keys, work cycle). Change it first if either side must deviate. The whole system (driver, weather-station `main/`, server images) works on real hardware (T5 V2.3.x, DEPG0213BN panel, ESP-IDF 6.1), including the landscape orientation of server-rendered images.
 
 ## Commands
 
